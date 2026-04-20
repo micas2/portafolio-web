@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from './LanguageContext';
-import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { projects } from './content'; // Add projects import for navigation
+import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle } from 'lucide-react';
 import galleryMap from './galleryMap.json';
 import './ProjectView.css';
 
@@ -87,7 +88,7 @@ function groupImages(images) {
 // ============================================================
 // Component
 // ============================================================
-export default function ProjectView({ project, goBack }) {
+export default function ProjectView({ project, goBack, onOpenProject }) {
   const { language } = useLanguage();
   const [images, setImages]         = useState([]);
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -229,39 +230,120 @@ export default function ProjectView({ project, goBack }) {
 
   const currentSrc = lightboxIndex !== null ? flatArr[lightboxIndex] : null;
 
+  // Next/Prev Project Navigation
+  const currentIndex = projects.findIndex(p => p.id === project.id);
+  const prevProj = projects[currentIndex - 1] || projects[projects.length - 1];
+  const nextProj = projects[currentIndex + 1] || projects[0];
+
+  const caseStudy = project.caseStudy;
+
   return (
     <div className="project-view slide-in section-container">
 
       <div className="floating-nav">
         <button onClick={goBack} className="btn-back glass-panel">
           <ArrowLeft size={20} />
-          <span>Volver</span>
+          <span>{language === 'es' ? 'Volver al Portafolio' : 'Back to Portfolio'}</span>
         </button>
       </div>
 
-      <div className="project-header">
-        <span className="project-role-badge">{project.role}</span>
-        <h1 className="project-view-title">{project.title}</h1>
-        <p className="project-view-desc">{project.description[language]}</p>
-
-        {project.links && project.links.length > 0 && (
-          <div className="project-links">
-            {project.links.map((link, idx) => (
-              <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="external-link">
-                <ExternalLink size={16} /> {link.text}
-              </a>
+      {/* RICH HERO SECTION */}
+      <section className="project-hero-section fade-in">
+        <div className="hero-content">
+          {caseStudy?.tag && (
+            <div className="project-tag-badge glass-panel">
+              <span className="dot-blink" />
+              {caseStudy.tag[language]}
+            </div>
+          )}
+          <h1 className="project-view-title">{project.title}</h1>
+          <p className="project-view-desc">{project.description[language]}</p>
+          
+          <div className="project-skill-tags">
+            {project.details[language].map((skill, idx) => (
+              <span key={idx} className="skill-pill">{skill.split(':')[0]}</span>
             ))}
           </div>
-        )}
 
-        {project.details?.[language] && (
-          <ul className="project-view-details">
-            {project.details[language].map((d, idx) => <li key={idx}>{d}</li>)}
-          </ul>
-        )}
-      </div>
+          {project.links && project.links.length > 0 && (
+            <div className="project-links mt-8">
+              {project.links.map((link, idx) => (
+                <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="external-link">
+                  <ExternalLink size={16} /> {link.text}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+        
+        {/* Hero Image / Mockup placeholder if no folder, else just a visual */}
+        <div className="hero-visual glass-panel">
+          <img 
+            src={images.length > 0 ? encodePath(project.folder, images[0]) : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"} 
+            alt={project.title} 
+            className="hero-img" 
+          />
+          <div className="hero-gradient-overlay" />
+        </div>
+      </section>
+
+      {/* BENTO SUMMARY / ROLE */}
+      {caseStudy?.challenge && (
+        <section className="bento-summary-section">
+          <div className="bento-grid">
+            <div className="bento-card main-card glass-panel">
+              <h3 className="bento-title">{caseStudy.challenge.title[language]}</h3>
+              <p className="bento-text">{caseStudy.challenge.content[language]}</p>
+            </div>
+            
+            <div className="bento-card info-card glass-panel">
+              <div className="info-item">
+                <h4>{language === 'es' ? 'Mi Rol' : 'My Role'}</h4>
+                <p>{caseStudy.roleInfo.role[language]}</p>
+              </div>
+              <div className="info-item">
+                <h4>Timeline</h4>
+                <p>{caseStudy.roleInfo.timeline[language]}</p>
+              </div>
+              <div className="info-item">
+                <h4>{language === 'es' ? 'Plataforma' : 'Platform'}</h4>
+                <p>{caseStudy.roleInfo.platform[language]}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* NARRATIVE SECTIONS (Process, Design System, etc.) */}
+      {caseStudy?.sections?.map((sec, idx) => (
+        <section key={idx} className={`narrative-section ${sec.dark ? 'dark-themed' : ''}`}>
+          <div className="narrative-container">
+            <div className="narrative-text">
+              <h2 className="section-subtitle">{sec.title[language]}</h2>
+              <p className="section-text-large">{sec.description[language]}</p>
+              
+              <div className="narrative-items-grid">
+                {sec.items.map((item, i) => (
+                  <div key={i} className={`narrative-item-card glass-panel ${item.border ? `border-${item.border}` : ''}`}>
+                    <div className="item-icon-wrapper">
+                      {item.icon === 'type' ? <Type size={20} /> : item.icon === 'box' ? <Box size={20} /> : <Layout size={20} />}
+                    </div>
+                    <h4>{item.title[language]}</h4>
+                    <p>{item.content[language]}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="narrative-visual glass-panel">
+              <img src={sec.image} alt={sec.title[language]} className="narrative-img" />
+            </div>
+          </div>
+        </section>
+      ))}
 
       <div className="project-gallery">
+
 
         {/* Live Preview iframes */}
         {project.links && project.links.length > 0 && (
@@ -307,11 +389,46 @@ export default function ProjectView({ project, goBack }) {
           );
         })}
 
-        {images.length === 0 && (
+        {images.length === 0 && !caseStudy && (
           <p className="empty-state">No hay imágenes disponibles para este proyecto.</p>
         )}
 
       </div>
+
+      {/* IMPACT SECTION */}
+      {caseStudy?.impact && (
+        <section className="impact-section">
+          <div className="impact-card glass-panel">
+            <h2 className="impact-title">{language === 'es' ? 'El Impacto' : 'The Impact'}</h2>
+            <p className="impact-desc">{caseStudy.impact.description[language]}</p>
+            
+            <div className="impact-stats-grid">
+              {caseStudy.impact.stats.map((stat, idx) => (
+                <div key={idx} className="stat-item">
+                  <span className="stat-value">{stat.value}</span>
+                  <span className="stat-label">{stat.label[language]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* NEXT/PREV PROJECT NAVIGATION */}
+      <section className="project-nav-footer">
+        <button className="nav-footer-btn prev" onClick={() => onOpenProject(prevProj)}>
+          <span className="nav-label">{language === 'es' ? 'Proyecto Anterior' : 'Previous Project'}</span>
+          <span className="nav-title">
+            <ChevronLeft size={16} /> {prevProj.title}
+          </span>
+        </button>
+        <button className="nav-footer-btn next" onClick={() => onOpenProject(nextProj)}>
+          <span className="nav-label">{language === 'es' ? 'Siguiente Proyecto' : 'Next Project'}</span>
+          <span className="nav-title">
+            {nextProj.title} <ChevronRight size={16} />
+          </span>
+        </button>
+      </section>
 
       {/* Lightbox */}
       {currentSrc !== null && (

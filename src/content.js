@@ -162,6 +162,61 @@ export const projects = [
         'UX Optimization & Testing: Lawyers and admins reach critical functions in under 3 clicks.',
         'Platform approved for vital use within Federal Courts.'
       ]
+    },
+    caseStudy: {
+      tag: { es: 'Producto Legal Tech', en: 'Legal Tech Product' },
+      challenge: {
+        title: { es: 'El Desafío', en: 'The Challenge' },
+        content: { 
+          es: 'El sistema original era un Producto Mínimo Viable (MVP) que resultaba confuso y lento para los abogados y administradores de la Justicia Federal. Mi objetivo principal fue reestructurar la información para que cualquier función clave estuviera a menos de 3 clics de distancia.',
+          en: 'The original system was an MVP that was confusing and slow for Federal Justice lawyers and administrators. My main goal was to restructure the information so that any key function was less than 3 clicks away.'
+        }
+      },
+      roleInfo: {
+        role: { es: 'Product Designer (Lead)', en: 'Product Designer (Lead)' },
+        timeline: { es: 'Ago 2022 - Jun 2023', en: 'Aug 2022 - Jun 2023' },
+        platform: { es: 'Web App (Desktop / Mobile)', en: 'Web App (Desktop / Mobile)' }
+      },
+      sections: [
+        {
+          id: 'process',
+          title: { es: 'Arquitectura y Wireframing', en: 'Architecture & Wireframing' },
+          description: { es: 'Antes de aplicar estilos, estructuramos el esqueleto funcional optimizando el tiempo de los profesionales.', en: 'Before applying styles, we structured the functional skeleton optimizing the professionals time.' },
+          items: [
+            { title: { es: 'Auditoría UX', en: 'UX Audit' }, content: { es: 'Identificación de cuellos de botella en el flujo antiguo.', en: 'Identification of bottlenecks in the old flow.' }, border: 'indigo' },
+            { title: { es: 'Low-Fidelity', en: 'Low-Fidelity' }, content: { es: 'Bocetado rápido para validar la regla de los 3 clics.', en: 'Quick sketching to validate the 3-click rule.' }, border: 'purple' }
+          ],
+          image: 'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2070&auto=format&fit=crop'
+        },
+        {
+          id: 'designSystem',
+          title: { es: 'Sistema de Diseño', en: 'Design System' },
+          description: { es: 'Creación de un sistema robusto en Figma bajo los principios de Atomic Design.', en: 'Creation of a robust system in Figma under Atomic Design principles.' },
+          items: [
+            { title: { es: 'Jerarquía', en: 'Hierarchy' }, content: { es: 'Estilos legibles para textos legales largos.', en: 'Readable styles for long legal texts.' }, icon: 'type' },
+            { title: { es: 'Componentes', en: 'Components' }, content: { es: 'Librería de botones, inputs y tablas con estados.', en: 'Library of buttons, inputs and tables with states.' }, icon: 'box' }
+          ],
+          image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=2055&auto=format&fit=crop',
+          dark: true
+        },
+        {
+          id: 'branding',
+          title: { es: 'Identidad y Social Media', en: 'Identity & Social Media' },
+          description: { es: 'Diseño de piezas estratégicas para acompañar el lanzamiento de la web.', en: 'Design of strategic pieces to accompany the web launch.' },
+          items: [
+            { title: { es: 'Instagram Feed', en: 'Instagram Feed' }, content: { es: 'Plantillas para cohesión visual.', en: 'Templates for visual cohesion.' }, icon: 'layout' },
+            { title: { es: 'Highlights', en: 'Highlights' }, content: { es: 'Banners instructivos para usuarios.', en: 'Instructional banners for users.' }, icon: 'box' }
+          ],
+          image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop'
+        }
+      ],
+      impact: {
+        description: { es: 'La plataforma logró optimizar los tiempos de gestión, eliminando la fricción operativa.', en: 'The platform optimized management times, eliminating operational friction.' },
+        stats: [
+          { value: '< 3', label: { es: 'Clics por función', en: 'Clicks per function' } },
+          { value: '100%', label: { es: 'Documentado', en: 'Documented' } }
+        ]
+      }
     }
   },
   {
