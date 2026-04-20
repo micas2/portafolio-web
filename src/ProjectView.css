@@ -197,6 +197,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 40px;
+  cursor: default;
+  box-sizing: border-box;
+}
+
 /* Button Group for Controls */
 .lightbox-controls {
   position: fixed;

@@ -94,7 +94,6 @@ export default function ProjectView({ project, goBack }) {
   const [scale, setScale]           = useState(1);
   const [dragPos, setDragPos]       = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  const [startPos, setStartPos]     = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     let imgs = (project.folder && galleryMap[project.folder]) ? [...galleryMap[project.folder]] : [];
@@ -171,17 +170,19 @@ export default function ProjectView({ project, goBack }) {
 
   const handleMouseDown = (e) => {
     if (scale <= 1) return;
+    if (e.button !== 0) return; // Only left click
     e.preventDefault();
     setIsDragging(true);
-    setStartPos({ x: e.clientX - dragPos.x, y: e.clientY - dragPos.y });
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging || scale <= 1) return;
-    setDragPos({
-      x: e.clientX - startPos.x,
-      y: e.clientY - startPos.y
-    });
+    // movementX/Y provides the delta since last move, 
+    // we divide by scale so the transform units match screen pixels 1:1
+    setDragPos(prev => ({
+      x: prev.x + e.movementX / scale,
+      y: prev.y + e.movementY / scale
+    }));
   };
 
   const handleMouseUp = () => {
