@@ -71,7 +71,7 @@ async function main() {
 
     try {
       await mkdir(destDirPath, { recursive: true });
-      await sharp(srcPath)
+      await sharp(srcPath, { limitInputPixels: false })
         .resize({ width: THUMB_WIDTH, withoutEnlargement: true })
         .webp({ quality: THUMB_QUALITY })
         .toFile(destPath);
