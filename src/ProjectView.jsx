@@ -171,7 +171,6 @@ export default function ProjectView({ project, goBack }) {
   const handleMouseDown = (e) => {
     if (scale <= 1) return;
     if (e.button !== 0) return; // Only left click
-    e.preventDefault();
     setIsDragging(true);
   };
 
