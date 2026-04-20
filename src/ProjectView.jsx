@@ -94,6 +94,8 @@ export default function ProjectView({ project, goBack }) {
   const [scale, setScale]           = useState(1);
   const [dragPos, setDragPos]       = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  const [hasMoved, setHasMoved]     = useState(false);
+  const [startPos, setStartPos]     = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     let imgs = (project.folder && galleryMap[project.folder]) ? [...galleryMap[project.folder]] : [];
@@ -119,6 +121,7 @@ export default function ProjectView({ project, goBack }) {
     setScale(1);
     setDragPos({ x: 0, y: 0 });
     setIsDragging(false);
+    setHasMoved(false);
   };
 
   const grouped = groupImages(images);
@@ -147,16 +150,18 @@ export default function ProjectView({ project, goBack }) {
 
   const handleZoomToggle = (e) => {
     e.stopPropagation();
+    if (hasMoved) return; // Prevent zoom reset if we were dragging
+    
     if (scale > 1) {
       resetLightboxState();
     } else {
-      setScale(2);
+      setScale(2.5); // Slightly higher initial zoom for better detail
     }
   };
 
   const zoomIn = (e) => {
     e.stopPropagation();
-    setScale(prev => Math.min(prev + 0.5, 5));
+    setScale(prev => Math.min(prev + 0.5, 12)); // Increased max zoom for long feeds
   };
 
   const zoomOut = (e) => {
@@ -171,17 +176,51 @@ export default function ProjectView({ project, goBack }) {
   const handleMouseDown = (e) => {
     if (scale <= 1) return;
     if (e.button !== 0) return; // Only left click
+    e.preventDefault(); // CRITICAL: Stop browser's default image dragging
     setIsDragging(true);
+    setHasMoved(false);
+    setStartPos({ x: e.clientX, y: e.clientY });
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging || scale <= 1) return;
-    // movementX/Y provides the delta since last move, 
-    // we divide by scale so the transform units match screen pixels 1:1
+    
+    // Determine if we've moved enough to be considered a "drag" vs a "click"
+    if (!hasMoved) {
+      const dist = Math.sqrt(Math.pow(e.clientX - startPos.x, 2) + Math.pow(e.clientY - startPos.y, 2));
+      if (dist > 5) setHasMoved(true);
+    }
+
     setDragPos(prev => ({
       x: prev.x + e.movementX / scale,
       y: prev.y + e.movementY / scale
     }));
+  };
+
+  // Touch support for mobile dragging
+  const handleTouchStart = (e) => {
+    if (scale <= 1) return;
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setHasMoved(false);
+    setStartPos({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging || scale <= 1) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - startPos.x;
+    const dy = touch.clientY - startPos.y;
+    
+    if (!hasMoved && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+      setHasMoved(true);
+    }
+
+    setDragPos(prev => ({
+      x: prev.x + dx / scale,
+      y: prev.y + dy / scale
+    }));
+    setStartPos({ x: touch.clientX, y: touch.clientY });
   };
 
   const handleMouseUp = () => {
@@ -282,6 +321,8 @@ export default function ProjectView({ project, goBack }) {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleMouseUp}
         >
 
           <div className="lightbox-controls">
@@ -311,6 +352,8 @@ export default function ProjectView({ project, goBack }) {
                     cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in'
                   }}
                   onMouseDown={handleMouseDown}
+                  onTouchStart={handleTouchStart}
+                  onDragStart={(e) => e.preventDefault()}
                 />
             }
           </div>
