@@ -97,6 +97,17 @@ export default function ProjectView({ project, goBack }) {
   const [startPos, setStartPos]     = useState({ x: 0, y: 0 });
 
   useEffect(() => {
+    let imgs = (project.folder && galleryMap[project.folder]) ? [...galleryMap[project.folder]] : [];
+    if (project.id === 'hot-travel') {
+      imgs = imgs.filter(img => !img.toLowerCase().startsWith('branding'));
+    }
+    setImages(imgs);
+    setLightboxIndex(null);
+    resetLightboxState();
+    window.scrollTo(0, 0);
+  }, [project]);
+
+  useEffect(() => {
     if (lightboxIndex !== null) {
       document.body.style.overflow = 'hidden';
     } else {

@@ -15,7 +15,7 @@ export default function Hero() {
         <p className="hero-description">{t.description}</p>
         
         <div className="hero-actions">
-          <a href="/proyectos/Micaela%20Ozor-%20Dise%C3%B1adora%20de%20producto%20-%20cv%20actualizado.pdf" target="_blank" rel="noopener noreferrer" className="btn-primary glass-panel">
+          <a href="/Micaela_Ozor_CV.pdf" target="_blank" rel="noopener noreferrer" className="btn-primary glass-panel">
             <Download size={20} />
             <span>{t.resume}</span>
           </a>
