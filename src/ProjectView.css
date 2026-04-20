@@ -268,7 +268,7 @@
 }
 
 .lightbox-media {
-  /* Initial state: fit in viewport with healthy margins */
+  /* Initial state: fit in viewport with healthy margins on desktop */
   max-width: calc(100vw - 120px);
   max-height: calc(100vh - 120px);
   width: auto;
@@ -276,11 +276,27 @@
   object-fit: contain;
   border-radius: 4px;
   cursor: zoom-in;
+  /* Use a smooth transition only when NOT dragging to keep the pan feel responsive */
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
   display: block;
   box-shadow: 0 20px 80px rgba(0,0,0,0.8);
   user-select: none;
   -webkit-user-drag: none;
+}
+
+@media (max-width: 768px) {
+  .lightbox-media {
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 160px); /* Leave more room for close button on top */
+  }
+  
+  .lightbox-nav {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
 }
 
 .lightbox-media.dragging {
