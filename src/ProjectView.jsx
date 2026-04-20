@@ -92,6 +92,9 @@ export default function ProjectView({ project, goBack }) {
   const [images, setImages]         = useState([]);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [zoomed, setZoomed]         = useState(false);
+  const [dragPos, setDragPos]       = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [startPos, setStartPos]     = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     let imgs = (project.folder && galleryMap[project.folder]) ? [...galleryMap[project.folder]] : [];
@@ -100,9 +103,15 @@ export default function ProjectView({ project, goBack }) {
     }
     setImages(imgs);
     setLightboxIndex(null);
-    setZoomed(false);
+    resetLightboxState();
     window.scrollTo(0, 0);
   }, [project]);
+
+  const resetLightboxState = () => {
+    setZoomed(false);
+    setDragPos({ x: 0, y: 0 });
+    setIsDragging(false);
+  };
 
   const grouped = groupImages(images);
 
@@ -111,21 +120,49 @@ export default function ProjectView({ project, goBack }) {
 
   const openLightbox = (src) => {
     const idx = flatArr.indexOf(src);
-    if (idx !== -1) { setLightboxIndex(idx); setZoomed(false); }
+    if (idx !== -1) { setLightboxIndex(idx); resetLightboxState(); }
   };
 
-  const closeLightbox = () => { setLightboxIndex(null); setZoomed(false); };
+  const closeLightbox = () => { setLightboxIndex(null); resetLightboxState(); };
 
   const prevImage = (e) => {
     e.stopPropagation();
-    setZoomed(false);
+    resetLightboxState();
     setLightboxIndex(i => (i === 0 ? flatArr.length - 1 : i - 1));
   };
 
   const nextImage = (e) => {
     e.stopPropagation();
-    setZoomed(false);
+    resetLightboxState();
     setLightboxIndex(i => (i === flatArr.length - 1 ? 0 : i + 1));
+  };
+
+  const handleZoomToggle = (e) => {
+    e.stopPropagation();
+    if (zoomed) {
+      resetLightboxState();
+    } else {
+      setZoomed(true);
+    }
+  };
+
+  const handleMouseDown = (e) => {
+    if (!zoomed) return;
+    e.preventDefault();
+    setIsDragging(true);
+    setStartPos({ x: e.clientX - dragPos.x, y: e.clientY - dragPos.y });
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || !zoomed) return;
+    setDragPos({
+      x: e.clientX - startPos.x,
+      y: e.clientY - startPos.y
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
   };
 
   const currentSrc = lightboxIndex !== null ? flatArr[lightboxIndex] : null;
@@ -216,7 +253,13 @@ export default function ProjectView({ project, goBack }) {
 
       {/* Lightbox */}
       {currentSrc !== null && (
-        <div className={`lightbox-overlay${zoomed ? ' is-zoomed' : ''}`} onClick={closeLightbox}>
+        <div 
+          className={`lightbox-overlay${zoomed ? ' is-zoomed' : ''}`} 
+          onClick={closeLightbox}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
 
           <button className="lightbox-close" onClick={closeLightbox}>
             <X size={22} />
@@ -228,11 +271,17 @@ export default function ProjectView({ project, goBack }) {
 
           <div
             className="lightbox-content"
-            onClick={e => { e.stopPropagation(); setZoomed(z => !z); }}
+            onClick={handleZoomToggle}
           >
             {currentSrc.endsWith('.mp4')
               ? <video src={encodePath(project.folder, currentSrc)} controls autoPlay className="lightbox-media" />
-              : <img src={encodePath(project.folder, currentSrc)} alt="Ampliación" className={`lightbox-media ${zoomed ? 'zoomed' : ''}`} />
+              : <img 
+                  src={encodePath(project.folder, currentSrc)} 
+                  alt="Ampliación" 
+                  className={`lightbox-media ${zoomed ? 'zoomed' : ''} ${isDragging ? 'dragging' : ''}`}
+                  style={zoomed ? { transform: `translate(${dragPos.x}px, ${dragPos.y}px) scale(2)` } : {}}
+                  onMouseDown={handleMouseDown}
+                />
             }
           </div>
 
