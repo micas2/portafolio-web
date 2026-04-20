@@ -91,24 +91,22 @@ export default function ProjectView({ project, goBack }) {
   const { language } = useLanguage();
   const [images, setImages]         = useState([]);
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [zoomed, setZoomed]         = useState(false);
+  const [scale, setScale]           = useState(1);
   const [dragPos, setDragPos]       = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [startPos, setStartPos]     = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    let imgs = (project.folder && galleryMap[project.folder]) ? [...galleryMap[project.folder]] : [];
-    if (project.id === 'hot-travel') {
-      imgs = imgs.filter(img => !img.toLowerCase().startsWith('branding'));
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
     }
-    setImages(imgs);
-    setLightboxIndex(null);
-    resetLightboxState();
-    window.scrollTo(0, 0);
-  }, [project]);
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [lightboxIndex]);
 
   const resetLightboxState = () => {
-    setZoomed(false);
+    setScale(1);
     setDragPos({ x: 0, y: 0 });
     setIsDragging(false);
   };
@@ -139,22 +137,36 @@ export default function ProjectView({ project, goBack }) {
 
   const handleZoomToggle = (e) => {
     e.stopPropagation();
-    if (zoomed) {
+    if (scale > 1) {
       resetLightboxState();
     } else {
-      setZoomed(true);
+      setScale(2);
+    }
+  };
+
+  const zoomIn = (e) => {
+    e.stopPropagation();
+    setScale(prev => Math.min(prev + 0.5, 5));
+  };
+
+  const zoomOut = (e) => {
+    e.stopPropagation();
+    const newScale = Math.max(1, scale - 0.5);
+    setScale(newScale);
+    if (newScale === 1) {
+      setDragPos({ x: 0, y: 0 });
     }
   };
 
   const handleMouseDown = (e) => {
-    if (!zoomed) return;
+    if (scale <= 1) return;
     e.preventDefault();
     setIsDragging(true);
     setStartPos({ x: e.clientX - dragPos.x, y: e.clientY - dragPos.y });
   };
 
   const handleMouseMove = (e) => {
-    if (!isDragging || !zoomed) return;
+    if (!isDragging || scale <= 1) return;
     setDragPos({
       x: e.clientX - startPos.x,
       y: e.clientY - startPos.y
@@ -254,16 +266,20 @@ export default function ProjectView({ project, goBack }) {
       {/* Lightbox */}
       {currentSrc !== null && (
         <div 
-          className={`lightbox-overlay${zoomed ? ' is-zoomed' : ''}`} 
+          className={`lightbox-overlay${scale > 1 ? ' is-zoomed' : ''}`} 
           onClick={closeLightbox}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
         >
 
-          <button className="lightbox-close" onClick={closeLightbox}>
-            <X size={22} />
-          </button>
+          <div className="lightbox-controls">
+            <button className="lightbox-control-btn" onClick={zoomIn} title="Zoom In">+</button>
+            <button className="lightbox-control-btn" onClick={zoomOut} title="Zoom Out">-</button>
+            <button className="lightbox-control-btn close-btn" onClick={closeLightbox}>
+              <X size={22} />
+            </button>
+          </div>
 
           <button className="lightbox-nav lightbox-prev" onClick={prevImage}>
             <ChevronLeft size={30} />
@@ -278,8 +294,11 @@ export default function ProjectView({ project, goBack }) {
               : <img 
                   src={encodePath(project.folder, currentSrc)} 
                   alt="Ampliación" 
-                  className={`lightbox-media ${zoomed ? 'zoomed' : ''} ${isDragging ? 'dragging' : ''}`}
-                  style={zoomed ? { transform: `translate(${dragPos.x}px, ${dragPos.y}px) scale(2)` } : {}}
+                  className={`lightbox-media ${scale > 1 ? 'zoomed' : ''} ${isDragging ? 'dragging' : ''}`}
+                  style={{ 
+                    transform: `translate(${dragPos.x}px, ${dragPos.y}px) scale(${scale})`,
+                    cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in'
+                  }}
                   onMouseDown={handleMouseDown}
                 />
             }
