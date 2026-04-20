@@ -25,7 +25,7 @@ export const translations = {
     },
     contact: {
       title: 'Contacto',
-      description: '¿Tienes un proyecto en mente para hacer realidad?',
+      description: '¿Buscás impulsar un nuevo proyecto, recibir asesoría experta o realizar un diagnóstico estratégico para potenciar tu producto?',
       email: 'micaela.ozor@gmail.com',
       phone: '+54 388 4585019',
       location: 'Salta, Argentina'
@@ -57,7 +57,7 @@ export const translations = {
     },
     contact: {
       title: 'Contact',
-      description: 'Have a project in mind or just want to say hi?',
+      description: 'Looking to kickstart a project, get expert consulting, or a strategic diagnosis to boost your product?',
       email: 'micaela.ozor@gmail.com',
       phone: '+54 388 4585019',
       location: 'Salta, Argentina'
