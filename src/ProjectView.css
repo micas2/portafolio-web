@@ -331,21 +331,21 @@
   transform: scale(1.08);
 }
 
-/* Professional Top-Edge Diamond Shine */
+/* Professional Volumetric Top-Edge Diamond Shine */
 .thumbnail-wrapper::after {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
-  height: 2px;
+  height: 8px; /* Reflejo mas grueso (Volumen) */
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.95),
     transparent
   );
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
   transition: none;
   pointer-events: none;
   z-index: 10;
