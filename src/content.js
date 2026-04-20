@@ -92,7 +92,17 @@ export const projects = [
         'Technological Implementation: Supabase DB and Vercel deployment.',
         'Accelerated development using AI agents (Antigravity, OpenCode).'
       ]
-    }
+    },
+    areas: { 
+      es: ['Web Architecture', 'Map Digitalization', 'UX/UI Design'],
+      en: ['Web Architecture', 'Map Digitalization', 'UX/UI Design']
+    },
+    techStack: ['React', 'Supabase', 'Vercel', 'IA Agents'],
+    workflow: [
+      { step: 'Auditoría', es: 'Análisis de cartografía física y digital.', en: 'Physical and digital cartography analysis.' },
+      { step: 'Estructura', es: 'Implementación de DB relacional en Supabase.', en: 'Relational DB implementation in Supabase.' },
+      { step: 'Desarrollo', es: 'Codificación con agentes de IA escalables.', en: 'Coding with scalable AI agents.' }
+    ]
   },
   {
     id: 'control-stock',
@@ -116,7 +126,17 @@ export const projects = [
         'Implementation of real-time reporting dashboards (Data Visualization).',
         'UX optimization for large inventory volumes and column selectors.'
       ]
-    }
+    },
+    areas: {
+      es: ['Logistics UX', 'Data Visualization', 'Industrial UI'],
+      en: ['Logistics UX', 'Data Visualization', 'Industrial UI']
+    },
+    techStack: ['React', 'Vite', 'CSS Grid', 'Data Viz'],
+    workflow: [
+      { step: 'Diagnóstico', es: 'Análisis de flujos críticos en depósitos.', en: 'Warehouse critical flow analysis.' },
+      { step: 'UX Strategy', es: 'Diseño de tablas complejas y selectores dinámicos.', en: 'Complex table design and dynamic selectors.' },
+      { step: 'Testing', es: 'Validación de usabilidad en entornos industriales.', en: 'Usability validation in industrial environments.' }
+    ]
   },
   {
     id: 'hot-travel',
@@ -139,7 +159,17 @@ export const projects = [
         'Email Marketing: Adaptive UX design (multi-device) of high-conversion emails.',
         'Modern aesthetics applied to luxury destination promotional campaigns.'
       ]
-    }
+    },
+    areas: {
+      es: ['Visual Identity', 'Conversion UX', 'Email Marketing'],
+      en: ['Visual Identity', 'Conversion UX', 'Email Marketing']
+    },
+    techStack: ['Adobe Suite', 'Figma', 'HTML Email'],
+    workflow: [
+      { step: 'Auditoría', es: 'Análisis de identidad de marcas corporativas.', en: 'Corporate brand identity analysis.' },
+      { step: 'Exploración', es: 'Ilustraciones personalizadas y moodboarding.', en: 'Custom illustrations and moodboarding.' },
+      { step: 'Maquetado', es: 'Diseño de piezas adaptativas de alta tasa de apertura.', en: 'High open-rate adaptive piece design.' }
+    ]
   },
   {
     id: 'notiexpress',
@@ -210,14 +240,24 @@ export const projects = [
           image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop'
         }
       ],
-      impact: {
+    impact: {
         description: { es: 'La plataforma logró optimizar los tiempos de gestión, eliminando la fricción operativa.', en: 'The platform optimized management times, eliminating operational friction.' },
         stats: [
           { value: '< 3', label: { es: 'Clics por función', en: 'Clicks per function' } },
           { value: '100%', label: { es: 'Documentado', en: 'Documented' } }
         ]
       }
-    }
+    },
+    areas: {
+      es: ['Product Design Lead', 'Legal Tech UX', 'Design Systems'],
+      en: ['Product Designer Lead', 'Legal Tech UX', 'Design Systems']
+    },
+    techStack: ['Figma', 'Atomic Design', 'React'],
+    workflow: [
+      { step: 'Investigación', es: 'Inmersión en procesos judiciales complejos.', en: 'Immersion in complex judicial processes.' },
+      { step: 'Arquitectura', es: 'Simplificación de flujos heredados (Legacy).', en: 'Simplification of legacy flows.' },
+      { step: 'Sistematización', es: 'Creación de librerías de componentes escalables.', en: 'Scalable component library creation.' }
+    ]
   },
   {
     id: 'sportmetric',

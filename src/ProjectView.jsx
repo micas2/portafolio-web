@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from './LanguageContext';
 import { projects } from './content'; // Add projects import for navigation
-import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle } from 'lucide-react';
+import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle, Cpu, Layers, Zap, Search, Settings, Rocket } from 'lucide-react';
 import galleryMap from './galleryMap.json';
 import './ProjectView.css';
 
@@ -259,10 +259,30 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
           <h1 className="project-view-title">{project.title}</h1>
           <p className="project-view-desc">{project.description[language]}</p>
           
-          <div className="project-skill-tags">
-            {project.details[language].map((skill, idx) => (
-              <span key={idx} className="skill-pill">{skill.split(':')[0]}</span>
-            ))}
+          <div className="project-metadata-groups">
+            {project.areas && (
+              <div className="metadata-group">
+                <span className="metadata-label">{language === 'es' ? 'Áreas de Trabajo' : 'Working Areas'}</span>
+                <div className="project-skill-tags">
+                  {project.areas[language].map((area, idx) => (
+                    <span key={idx} className="skill-pill area-tag">{area}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {project.techStack && (
+              <div className="metadata-group">
+                <span className="metadata-label">{language === 'es' ? 'Stack Tecnológico' : 'Tech Stack'}</span>
+                <div className="project-skill-tags">
+                  {project.techStack.map((tech, idx) => (
+                    <span key={idx} className="skill-pill tech-tag">
+                      <Cpu size={12} className="inline mr-1" /> {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {project.links && project.links.length > 0 && (
@@ -287,7 +307,32 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
         </div>
       </section>
 
+      {/* STRATEGIC WORKFLOW SECTION */}
+      {project.workflow && (
+        <section className="workflow-section fade-in">
+          <div className="workflow-container glass-panel">
+            <h3 className="section-label">{language === 'es' ? 'Proceso Estratégico' : 'Strategic Journey'}</h3>
+            <div className="workflow-steps">
+              {project.workflow.map((item, idx) => (
+                <div key={idx} className="workflow-step">
+                  <div className="step-icon">
+                    {idx === 0 ? <Search size={20} /> : idx === 1 ? <Settings size={20} /> : <Rocket size={20} />}
+                    <span className="step-number">{idx + 1}</span>
+                  </div>
+                  <div className="step-content">
+                    <h4>{item.step}</h4>
+                    <p>{item[language]}</p>
+                  </div>
+                  {idx < project.workflow.length - 1 && <div className="step-connector" />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* BENTO SUMMARY / ROLE */}
+
       {caseStudy?.challenge && (
         <section className="bento-summary-section">
           <div className="bento-grid">
