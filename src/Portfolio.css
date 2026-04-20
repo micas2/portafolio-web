@@ -1,0 +1,111 @@
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.portfolio-filters {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.05);
+  font-weight: 500;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.filter-btn.active {
+  background: var(--text-dark);
+  color: #fff;
+  border-color: var(--text-dark);
+}
+
+.portfolio-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.portfolio-grid.all {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.portfolio-grid.web {
+  grid-template-columns: 1fr;
+}
+
+.portfolio-grid.social {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* For web layout we make cards look wider and horizontal if possible */
+.portfolio-grid.web .project-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-card {
+  padding: 24px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+}
+
+.project-role {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-link {
+  background: var(--accent-warm);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .portfolio-grid.web .project-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .portfolio-grid.web .project-link {
+    margin-top: 16px;
+  }
+}

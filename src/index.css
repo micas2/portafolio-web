@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-neutral: #fefdfd;
+  --bg-darker: #f5f3f3;
+  --text-dark: #2a2829;
+  --text-light: #6e6a6b;
+  --accent-warm: #dca4a6; /* Dusty rosa cálido */
+  --accent-cool: #d8a2b5; /* Rosa pálido más frío/magenta */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-neutral);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Fondo interactivo global */
+.interactive-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--bg-neutral);
+  /* Combined Layer: Vibrant Interactive Spots + Atmospheric Lights */
+  background-image: 
+    /* Main interactive spot 1 (Warm Pink) */
+    radial-gradient(
+      circle at var(--x, 50%) var(--y, 50%),
+      color-mix(in srgb, var(--accent-warm) 45%, transparent) 0%,
+      transparent 35%
+    ),
+    /* Main interactive spot 2 (Cool Pink) */
+    radial-gradient(
+      circle at calc(100% - var(--x, 50%)) calc(100% - var(--y, 50%)),
+      color-mix(in srgb, var(--accent-cool) 35%, transparent) 0%,
+      transparent 45%
+    ),
+    /* Atmospheric 'Lights' for depth */
+    radial-gradient(
+      circle at 80% 20%,
+      color-mix(in srgb, var(--accent-warm) 10%, transparent) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      color-mix(in srgb, var(--accent-cool) 10%, transparent) 0%,
+      transparent 40%
+    );
+  transition: background 0.2s ease-out;
+}
+
+/* Subtle Noise Texture Overlay */
+.interactive-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+button {
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.star-particle {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  background: var(--accent-warm);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  animation: sparkAnim 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sparkAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0) rotate(180deg);
+    opacity: 0;
+  }
+}
