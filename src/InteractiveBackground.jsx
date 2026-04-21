@@ -33,8 +33,8 @@ export default function InteractiveBackground() {
           id: Math.random(),
           x: Math.random() * 100, // percentage
           y: viewportTop - 50,    // start slightly above current view
-          speed: 1.5 + Math.random() * 2.5,
-          size: 15 + Math.random() * 25,
+          speed: 1.2 + Math.random() * 2.0, // Slightly slower for more elegance
+          size: 25 + Math.random() * 30,    // Increased size (25px to 55px)
           rotation: Math.random() * 360,
           rotSpeed: (Math.random() - 0.5) * 2,
           type: Math.random() > 0.5 ? 'glass' : 'linear',
