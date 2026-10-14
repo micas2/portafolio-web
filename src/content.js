@@ -373,6 +373,8 @@ export const projects = [
     title: 'Whisfy',
     category: 'app',
     folder: 'WHISFY', 
+    cover: { folder: 'WHISFY', src: 'LOGO/logo png/logo png_Mesa de trabajo 1.png' },
+    coverContain: true,
     role: 'Product Designer',
     description: {
       es: 'Diseño integral de Interfaz de Usuario (UI) y manuales de marca para aplicación social/intereses.',
