@@ -78,8 +78,8 @@ export const projects = [
       { text: 'Ver Proyecto San Luis', url: 'https://san-luis-mapa.vercel.app/' }
     ],
     description: {
-      es: 'Aplicaciones web con mapas interactivos para loteos. Digitalización de cartografía, base de datos en Supabase y despliegue en Vercel con IA.',
-      en: 'Web apps with interactive maps for real estate. Cartography digitization, Supabase DB and Vercel deployment with AI agents.'
+      es: 'Aplicaciones web con mapas interactivos para loteos. Digitalización de cartografía, base de datos en Supabase y despliegue en Vercel.',
+      en: 'Web apps with interactive maps for real estate. Cartography digitization, Supabase DB and Vercel deployment.'
     },
     details: {
       es: [
@@ -94,12 +94,13 @@ export const projects = [
       ]
     },
     areas: { 
-      es: ['Web Architecture', 'Map Digitalization', 'UX/UI Design'],
-      en: ['Web Architecture', 'Map Digitalization', 'UX/UI Design']
+      es: ['Arquitectura Web', 'Digitalización de Mapas', 'Diseño UX/UI', 'Prototipo Avanzado'],
+      en: ['Web Architecture', 'Map Digitalization', 'UX/UI Design', 'Advanced Prototyping']
     },
-    techStack: ['React', 'Supabase', 'Vercel', 'IA Agents'],
+    techStack: ['React', 'Supabase', 'Vercel', 'Figma', 'Agentes IA'],
     workflow: [
-      { step: 'Auditoría', es: 'Análisis de cartografía física y digital.', en: 'Physical and digital cartography analysis.' },
+      { step: 'Digitalización', es: 'Vectorización de mapas y prototipado avanzado.', en: 'Map vectorization and advanced prototyping.' },
+      { step: 'Implementación de manual de marca', es: 'Aplicación de identidad visual y lineamientos de marca al producto.', en: 'Application of visual identity and brand guidelines to the product.' },
       { step: 'Estructura', es: 'Implementación de DB relacional en Supabase.', en: 'Relational DB implementation in Supabase.' },
       { step: 'Desarrollo', es: 'Codificación con agentes de IA escalables.', en: 'Coding with scalable AI agents.' }
     ]

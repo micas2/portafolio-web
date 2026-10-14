@@ -838,3 +838,63 @@
   .thumbnail-wrapper { border-radius: 12px; }
   .project-view-title { font-size: 2.2rem; }
 }
+
+/* ============================================================
+   NEUTRAL LOADING PLACEHOLDER (SmartImage)
+   Soft on-brand skeleton that fades out once the image loads.
+   ============================================================ */
+.img-skeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(110deg, #f1ebe9 8%, #fbf8f7 20%, #f1ebe9 33%);
+  background-size: 220% 100%;
+  animation: imgShimmer 1.8s ease-in-out infinite;
+}
+
+.img-skeleton-gem {
+  width: 22px;
+  height: 22px;
+  background: var(--accent-color);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  opacity: 0.35;
+  animation: imgGemPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes imgShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes imgGemPulse {
+  0%, 100% { opacity: 0.18; transform: scale(0.85); }
+  50% { opacity: 0.45; transform: scale(1.05); }
+}
+
+.img-fade {
+  transition: opacity 0.5s ease;
+}
+
+img.img-fade.is-loading { opacity: 0; }
+img.img-fade.is-loaded { opacity: 1; }
+
+.hero-img {
+  position: relative;
+  z-index: 2;
+}
+img.hero-img.is-loaded { opacity: 0.85; }
+
+.thumbnail-img {
+  position: relative;
+  z-index: 2;
+}
+
+/* Lightbox: keep the blurred backdrop visible while loading */
+.lightbox-content { position: relative; }
+.img-skeleton.lightbox-skeleton {
+  background: transparent;
+  animation: none;
+}

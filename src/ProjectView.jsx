@@ -3,23 +3,35 @@ import { useLanguage } from './LanguageContext';
 import { projects } from './content'; // Add projects import for navigation
 import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle, Cpu, Layers, Zap, Search, Settings, Rocket } from 'lucide-react';
 import galleryMap from './galleryMap.json';
+import SmartImage from './SmartImage';
 import './ProjectView.css';
 
 // ============================================================
-// URL encoder: encodes EACH segment of path individually
-// so spaces, +, (, ) all become safe %xx sequences
+// Workflow step icons (index-based, falls back to Rocket)
 // ============================================================
-function encodePath(folder, src, isThumb = false) {
+const WORKFLOW_ICONS = [Search, Settings, Layers, Rocket];
+
+// ============================================================
+// URL encoder: encodes EACH segment of path individually
+// so spaces, +, (, ) all become safe %xx sequences.
+// variant: 'thumb' (grid) | 'display' (hero + lightbox) | 'full' (videos/gifs)
+// ============================================================
+function encodePath(folder, src, variant = 'full') {
   const fullPath = `${folder}/${src}`;
   let encoded = fullPath
     .split('/')
     .map(seg => encodeURIComponent(seg))
     .join('/');
-  
-  if (isThumb && !src.endsWith('.gif') && !src.endsWith('.mp4')) {
-    // Thumbnails are WebP in a parallel directory
-    encoded = encoded.replace(/\.[^.]+$/, '.webp');
-    return `/proyectos-thumbs/${encoded}`;
+
+  const isRaster = !src.endsWith('.gif') && !src.endsWith('.mp4');
+
+  if (isRaster && variant === 'thumb') {
+    // 600px WebP in a parallel directory
+    return `/proyectos-thumbs/${encoded.replace(/\.[^.]+$/, '.webp')}`;
+  }
+  if (isRaster && variant === 'display') {
+    // 1600px WebP in a parallel directory
+    return `/proyectos-display/${encoded.replace(/\.[^.]+$/, '.webp')}`;
   }
   return `/proyectos/${encoded}`;
 }
@@ -298,10 +310,13 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
         
         {/* Hero Image / Mockup placeholder if no folder, else just a visual */}
         <div className="hero-visual glass-panel">
-          <img 
-            src={images.length > 0 ? encodePath(project.folder, images[0]) : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"} 
-            alt={project.title} 
-            className="hero-img" 
+          <SmartImage
+            key={project.id}
+            src={images.length > 0 ? encodePath(project.folder, images[0], 'display') : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"}
+            alt={project.title}
+            className="hero-img"
+            fetchPriority="high"
+            decoding="async"
           />
           <div className="hero-gradient-overlay" />
         </div>
@@ -313,19 +328,22 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
           <div className="workflow-container glass-panel">
             <h3 className="section-label">{language === 'es' ? 'Proceso Estratégico' : 'Strategic Journey'}</h3>
             <div className="workflow-steps">
-              {project.workflow.map((item, idx) => (
-                <div key={idx} className="workflow-step">
-                  <div className="step-icon">
-                    {idx === 0 ? <Search size={20} /> : idx === 1 ? <Settings size={20} /> : <Rocket size={20} />}
-                    <span className="step-number">{idx + 1}</span>
+              {project.workflow.map((item, idx) => {
+                const StepIcon = WORKFLOW_ICONS[idx] || Rocket;
+                return (
+                  <div key={idx} className="workflow-step">
+                    <div className="step-icon">
+                      <StepIcon size={20} />
+                      <span className="step-number">{idx + 1}</span>
+                    </div>
+                    <div className="step-content">
+                      <h4>{item.step}</h4>
+                      <p>{item[language]}</p>
+                    </div>
+                    {idx < project.workflow.length - 1 && <div className="step-connector" />}
                   </div>
-                  <div className="step-content">
-                    <h4>{item.step}</h4>
-                    <p>{item[language]}</p>
-                  </div>
-                  {idx < project.workflow.length - 1 && <div className="step-connector" />}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -418,13 +436,13 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
               <h2 className="gallery-section-title">{cat}</h2>
               <div className="thumbnail-grid">
                 {imgs.map((src, i) => {
-                  const thumbUrl = encodePath(project.folder, src, true);
+                  const thumbUrl = encodePath(project.folder, src, 'thumb');
                   const isVideo = src.endsWith('.mp4');
                   return (
-                    <div key={i} className="thumbnail-wrapper glass-panel" onClick={() => openLightbox(src)}>
+                    <div key={src} className="thumbnail-wrapper glass-panel" onClick={() => openLightbox(src)}>
                       {isVideo
                         ? <video src={encodePath(project.folder, src)} autoPlay loop muted playsInline className="thumbnail-img" />
-                        : <img src={thumbUrl} alt={`${cat} ${i + 1}`} className="thumbnail-img" loading="lazy" decoding="async" />
+                        : <SmartImage key={src} src={thumbUrl} alt={`${cat} ${i + 1}`} className="thumbnail-img" loading="lazy" decoding="async" />
                       }
                     </div>
                   );
@@ -505,11 +523,13 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
           >
             {currentSrc.endsWith('.mp4')
               ? <video src={encodePath(project.folder, currentSrc)} controls autoPlay className="lightbox-media" />
-              : <img 
-                  src={encodePath(project.folder, currentSrc)} 
-                  alt="Ampliación" 
+              : <SmartImage
+                  key={currentSrc}
+                  src={encodePath(project.folder, currentSrc, 'display')}
+                  alt="Ampliación"
                   className={`lightbox-media ${scale > 1 ? 'zoomed' : ''} ${isDragging ? 'dragging' : ''}`}
-                  style={{ 
+                  skeletonClassName="lightbox-skeleton"
+                  style={{
                     transform: `translate(${dragPos.x}px, ${dragPos.y}px) scale(${scale})`,
                     cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in'
                   }}
