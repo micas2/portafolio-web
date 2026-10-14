@@ -70,7 +70,7 @@ export const projects = [
     id: 'proyecto-norte',
     title: 'Proyecto Norte (Las Achiras & San Luis)',
     category: 'web',
-    role: 'Web App Developer & Designer',
+    role: 'Diseñadora de Producto & Web',
     folder: null, 
     image: null,
     cover: { folder: 'Proyecto Norte', src: 'portada.png' },
@@ -405,7 +405,7 @@ export const experience = [
   {
     id: 1,
     company: 'Proyecto Norte',
-    role: 'Web App Developer & Designer (Freelance)',
+    role: 'Diseñadora de Producto & Web (Freelance)',
     date: 'Abril 2026'
   },
   {
