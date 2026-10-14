@@ -176,22 +176,31 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   margin-bottom: 32px;
 }
 
 .external-link {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--accent-color);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: opacity 0.2s;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 12px 22px;
+  border-radius: 12px;
+  background: rgba(220, 164, 166, 0.1);
+  border: 1px solid var(--accent-color);
+  transition: all 0.25s ease;
 }
 
 .external-link:hover {
-  opacity: 0.7;
+  background: var(--accent-color);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .project-view-details {
