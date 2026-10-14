@@ -411,8 +411,8 @@ export const projects = [
     folder: 'app estetica', 
     role: 'UI/UX & Branding',
     description: {
-      es: 'Diseño de logotipos e interfaces UI para aplicaciones móviles.',
-      en: 'Design of logos and UI interfaces for mobile applications.'
+      es: 'Diseño de logotipos e interfaces UI para aplicaciones móviles. Primer boceto para una app, donde se eligió un formato diferente para disponer el UI y se creó el diseño de las ilustraciones y pantallas.',
+      en: 'Design of logos and UI interfaces for mobile applications. First sketch for an app, where a different format was chosen to lay out the UI, and the design of the illustrations and screens was created.'
     },
     details: {
       es: [
@@ -425,7 +425,18 @@ export const projects = [
         'Modernized logotypes with high vector fidelity.',
         'First sketches of UI interface profiles (Components and palettes).'
       ]
-    }
+    },
+    areas: {
+      es: ['Ilustraciones', 'Diseño UX/UI'],
+      en: ['Illustrations', 'UX/UI Design']
+    },
+    techStack: ['Figma'],
+    processLabel: { es: 'Proceso Creativo', en: 'Creative Process' },
+    workflow: [
+      { step: 'Wireframe de la App Mobile', icon: 'layoutTemplate', es: 'Creación del wireframe de la app mobile.', en: 'Creation of the mobile app wireframe.' },
+      { step: 'Implementación en Pantallas', icon: 'monitorSmartphone', es: 'Implementación del diseño en las pantallas de la app.', en: 'Implementation of the design on the app screens.' },
+      { step: 'Creación de Ilustraciones', icon: 'penTool', es: 'Creación de las ilustraciones de la marca.', en: 'Creation of the brand illustrations.' }
+    ]
   },
   {
     id: 'terrae',
