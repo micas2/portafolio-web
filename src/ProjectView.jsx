@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from './LanguageContext';
 import { projects } from './content'; // Add projects import for navigation
-import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle, Cpu, Layers, Zap, Search, Settings, Rocket, Map, Palette, Code, Activity, Target, Smartphone } from 'lucide-react';
+import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle, Cpu, Layers, Zap, Search, Settings, Rocket, Map, Palette, Code, Activity, Target, Smartphone, SearchCheck, PenTool, Compass, Mail } from 'lucide-react';
 import galleryMap from './galleryMap.json';
 import SmartImage from './SmartImage';
 import './ProjectView.css';
@@ -23,6 +23,10 @@ const WORKFLOW_ICON_MAP = {
   activity: Activity,
   target: Target,
   smartphone: Smartphone,
+  searchCheck: SearchCheck,
+  penTool: PenTool,
+  compass: Compass,
+  mail: Mail,
 };
 
 // ============================================================

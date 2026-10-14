@@ -147,8 +147,8 @@ export const projects = [
     folder: 'Hot Travel',
     role: 'Diseñadora Gráfica & UX',
     description: {
-      es: 'Identidad Visual y Email Marketing de alta conversión para agencias (Barceló, Riu, Hard Rock).',
-      en: 'Visual Identity and high-conversion Email Marketing for agencies (Barceló, Riu, Hard Rock).'
+      es: 'Revectorización de identidad de marca de Hot Travel, ilustraciones y creación de email marketing.',
+      en: 'Hot Travel brand identity re-vectorization, illustrations and email marketing creation.'
     },
     details: {
       es: [
@@ -163,14 +163,15 @@ export const projects = [
       ]
     },
     areas: {
-      es: ['Visual Identity', 'Conversion UX', 'Email Marketing'],
-      en: ['Visual Identity', 'Conversion UX', 'Email Marketing']
+      es: ['Ilustraciones', 'Implementación de Marca', 'Email Marketing'],
+      en: ['Illustrations', 'Brand Implementation', 'Email Marketing']
     },
     techStack: ['Adobe Suite', 'Figma', 'HTML Email'],
     workflow: [
-      { step: 'Auditoría', es: 'Análisis de identidad de marcas corporativas.', en: 'Corporate brand identity analysis.' },
-      { step: 'Exploración', es: 'Ilustraciones personalizadas y moodboarding.', en: 'Custom illustrations and moodboarding.' },
-      { step: 'Maquetado', es: 'Diseño de piezas adaptativas de alta tasa de apertura.', en: 'High open-rate adaptive piece design.' }
+      { step: 'Auditoría', icon: 'searchCheck', es: 'Análisis de identidad de marcas corporativas.', en: 'Corporate brand identity analysis.' },
+      { step: 'Ilustraciones', icon: 'penTool', es: 'Vectorización de elementos de la marca Hot Travel.', en: 'Vectorization of Hot Travel brand elements.' },
+      { step: 'Exploración', icon: 'compass', es: 'Investigación de cada marca que engloba Hot Travel (Riu, Hard Rock, Barceló) y moodboarding.', en: 'Research on each brand under Hot Travel (Riu, Hard Rock, Barceló) and moodboarding.' },
+      { step: 'Maquetado', icon: 'mail', es: 'Diseño de piezas adaptativas de alta tasa de apertura.', en: 'High open-rate adaptive piece design.' }
     ]
   },
   {
