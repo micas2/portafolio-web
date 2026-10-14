@@ -78,6 +78,7 @@ export default function InteractiveBackground() {
   useEffect(() => {
     requestRef.current = requestAnimationFrame(update);
     return () => cancelAnimationFrame(requestRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

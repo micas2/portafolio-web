@@ -73,6 +73,7 @@ export const projects = [
     role: 'Web App Developer & Designer',
     folder: null, 
     image: null,
+    cover: { folder: 'Proyecto Norte', src: 'portada.png' },
     links: [
       { text: 'Ver Proyecto Las Achiras', url: 'https://las-achiras-mapa.vercel.app/' },
       { text: 'Ver Proyecto San Luis', url: 'https://san-luis-mapa.vercel.app/' }
@@ -99,8 +100,8 @@ export const projects = [
     },
     techStack: ['React', 'Supabase', 'Vercel', 'Figma', 'Agentes IA'],
     workflow: [
-      { step: 'Digitalización', es: 'Vectorización de mapas y prototipado avanzado.', en: 'Map vectorization and advanced prototyping.' },
-      { step: 'Implementación de manual de marca', es: 'Aplicación de identidad visual y lineamientos de marca al producto.', en: 'Application of visual identity and brand guidelines to the product.' },
+      { step: 'Digitalización', icon: 'map', es: 'Vectorización de mapas y prototipado avanzado.', en: 'Map vectorization and advanced prototyping.' },
+      { step: 'Marca', icon: 'palette', es: 'Aplicación de identidad visual y lineamientos de marca al producto.', en: 'Application of visual identity and brand guidelines to the product.' },
       { step: 'Estructura', es: 'Implementación de DB relacional en Supabase.', en: 'Relational DB implementation in Supabase.' },
       { step: 'Desarrollo', es: 'Codificación con agentes de IA escalables.', en: 'Coding with scalable AI agents.' }
     ]

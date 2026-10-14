@@ -75,7 +75,7 @@ function App() {
       {!currentProject && <Navbar />}
       <main>
         {currentProject ? (
-          <ProjectView project={currentProject} goBack={closeProject} onOpenProject={openProject} />
+          <ProjectView key={currentProject.id} project={currentProject} goBack={closeProject} onOpenProject={openProject} />
         ) : (
           <>
             <Hero />

@@ -7,7 +7,7 @@ function slugify(text) {
   return text
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '') // Remove accents
-    .replace(/[^\w\s\.-]/gi, '')   // Remove special characters but keep spaces, dots, dashes
+    .replace(/[^\w\s.-]/gi, '')   // Remove special characters but keep spaces, dots, dashes
     .trim();
 }
 

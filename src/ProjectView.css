@@ -271,9 +271,9 @@
 }
 
 .area-tag {
-  background: rgba(99, 102, 241, 0.05);
-  border-color: rgba(99, 102, 241, 0.1);
-  color: #6366f1;
+  background: rgba(42, 40, 41, 0.04);
+  border: 1px solid rgba(42, 40, 41, 0.14);
+  color: var(--text-dark);
 }
 
 .tech-tag {

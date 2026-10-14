@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from './LanguageContext';
 import { projects } from './content'; // Add projects import for navigation
-import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle, Cpu, Layers, Zap, Search, Settings, Rocket } from 'lucide-react';
+import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle, Cpu, Layers, Zap, Search, Settings, Rocket, Map, Palette, Code } from 'lucide-react';
 import galleryMap from './galleryMap.json';
 import SmartImage from './SmartImage';
 import './ProjectView.css';
@@ -10,6 +10,17 @@ import './ProjectView.css';
 // Workflow step icons (index-based, falls back to Rocket)
 // ============================================================
 const WORKFLOW_ICONS = [Search, Settings, Layers, Rocket];
+
+// Named icons lets each step pick its own icon; fallback is index-based.
+const WORKFLOW_ICON_MAP = {
+  search: Search,
+  settings: Settings,
+  layers: Layers,
+  rocket: Rocket,
+  code: Code,
+  map: Map,
+  palette: Palette,
+};
 
 // ============================================================
 // URL encoder: encodes EACH segment of path individually
@@ -102,7 +113,6 @@ function groupImages(images) {
 // ============================================================
 export default function ProjectView({ project, goBack, onOpenProject }) {
   const { language } = useLanguage();
-  const [images, setImages]         = useState([]);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [scale, setScale]           = useState(1);
   const [dragPos, setDragPos]       = useState({ x: 0, y: 0 });
@@ -110,14 +120,15 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
   const [hasMoved, setHasMoved]     = useState(false);
   const [startPos, setStartPos]     = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
+  const images = useMemo(() => {
     let imgs = (project.folder && galleryMap[project.folder]) ? [...galleryMap[project.folder]] : [];
     if (project.id === 'hot-travel') {
       imgs = imgs.filter(img => !img.toLowerCase().startsWith('branding'));
     }
-    setImages(imgs);
-    setLightboxIndex(null);
-    resetLightboxState();
+    return imgs;
+  }, [project]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [project]);
 
@@ -312,7 +323,13 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
         <div className="hero-visual glass-panel">
           <SmartImage
             key={project.id}
-            src={images.length > 0 ? encodePath(project.folder, images[0], 'display') : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"}
+            src={
+              project.cover
+                ? encodePath(project.cover.folder, project.cover.src, 'display')
+                : images.length > 0
+                  ? encodePath(project.folder, images[0], 'display')
+                  : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
+            }
             alt={project.title}
             className="hero-img"
             fetchPriority="high"
@@ -326,10 +343,10 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
       {project.workflow && (
         <section className="workflow-section fade-in">
           <div className="workflow-container glass-panel">
-            <h3 className="section-label">{language === 'es' ? 'Proceso Estratégico' : 'Strategic Journey'}</h3>
+            <h3 className="section-label">{language === 'es' ? 'Proceso de Desarrollo' : 'Development Process'}</h3>
             <div className="workflow-steps">
               {project.workflow.map((item, idx) => {
-                const StepIcon = WORKFLOW_ICONS[idx] || Rocket;
+                const StepIcon = (item.icon && WORKFLOW_ICON_MAP[item.icon]) || WORKFLOW_ICONS[idx] || Rocket;
                 return (
                   <div key={idx} className="workflow-step">
                     <div className="step-icon">
