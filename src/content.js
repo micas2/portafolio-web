@@ -322,7 +322,17 @@ export const projects = [
         'Management and high-reach aesthetic content for stories.',
         'Special "Highlights" formats with vector icons.'
       ]
-    }
+    },
+    areas: {
+      es: ['Branding e Identidad Visual', 'Gestión de Redes Sociales'],
+      en: ['Branding & Visual Identity', 'Social Media Management']
+    },
+    techStack: ['Illustrator', 'After Effects'],
+    processLabel: { es: 'Proceso Creativo', en: 'Creative Process' },
+    workflow: [
+      { step: 'Diseño de Marca', icon: 'palette', es: 'Rediseño del logotipo y definición de la identidad visual de la marca.', en: 'Logo redesign and definition of the brand visual identity.' },
+      { step: 'Creación de Contenido para Redes', icon: 'megaphone', es: 'Diseño de piezas y contenido para redes sociales.', en: 'Design of pieces and content for social media.' }
+    ]
   },
   {
     id: 'f2f',

@@ -358,7 +358,7 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
       {project.workflow && (
         <section className="workflow-section fade-in">
           <div className="workflow-container glass-panel">
-            <h3 className="section-label">{language === 'es' ? 'Proceso de Desarrollo' : 'Development Process'}</h3>
+            <h3 className="section-label">{project.processLabel ? project.processLabel[language] : (language === 'es' ? 'Proceso de Desarrollo' : 'Development Process')}</h3>
             <div className="workflow-steps">
               {project.workflow.map((item, idx) => {
                 const StepIcon = (item.icon && WORKFLOW_ICON_MAP[item.icon]) || WORKFLOW_ICONS[idx] || Rocket;
