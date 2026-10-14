@@ -271,6 +271,7 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
   const nextProj = projects[currentIndex + 1] || projects[0];
 
   const caseStudy = project.caseStudy;
+  const coverIsSvg = !!project.cover?.src?.toLowerCase().endsWith('.svg');
 
   return (
     <div className="project-view slide-in section-container">
@@ -332,7 +333,7 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
         </div>
         
         {/* Hero Image / Mockup placeholder if no folder, else just a visual */}
-        <div className="hero-visual glass-panel">
+        <div className={`hero-visual glass-panel${coverIsSvg ? ' hero-visual--contain' : ''}`}>
           <SmartImage
             key={project.id}
             src={
@@ -347,7 +348,7 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
             fetchPriority="high"
             decoding="async"
           />
-          <div className="hero-gradient-overlay" />
+          {!coverIsSvg && <div className="hero-gradient-overlay" />}
         </div>
       </section>
 
@@ -427,7 +428,7 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
               </div>
             </div>
             
-            <div className="narrative-visual glass-panel">
+            <div className={`narrative-visual glass-panel${typeof sec.image === 'string' && sec.image.toLowerCase().endsWith('.svg') ? ' narrative-visual--contain' : ''}`}>
               <img
                 src={sec.image.startsWith('http') ? sec.image : encodePath(project.folder, sec.image, 'display')}
                 alt={sec.title[language]}

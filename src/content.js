@@ -179,7 +179,7 @@ export const projects = [
     title: 'Noti Express',
     category: 'web',
     folder: 'notiexpress',
-    cover: { folder: 'notiexpress', src: 'logo1.svg' },
+    cover: { folder: 'notiexpress', src: 'logo2.svg' },
     role: 'Product Designer',
     description: {
       es: 'Plataforma de gestión legal escalable utilizada en Justicia Federal. Transformación de MVP y optimización UX.',
@@ -220,7 +220,7 @@ export const projects = [
             { title: { es: 'Auditoría UX', en: 'UX Audit' }, content: { es: 'Identificación de cuellos de botella en el flujo antiguo.', en: 'Identification of bottlenecks in the old flow.' }, border: 'indigo' },
             { title: { es: 'Low-Fidelity', en: 'Low-Fidelity' }, content: { es: 'Bocetado rápido para validar la regla de los 3 clics.', en: 'Quick sketching to validate the 3-click rule.' }, border: 'purple' }
           ],
-          image: 'logo2.svg'
+          image: 'logo1.svg'
         },
         {
           id: 'designSystem',
