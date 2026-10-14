@@ -355,7 +355,18 @@ export const projects = [
         'Robust digital strategy for product sales on Instagram.',
         'Creation of fliers for product launch event organizations.'
       ]
-    }
+    },
+    areas: {
+      es: ['Branding', 'Gestión de Redes', 'Creación de Contenido', 'Fotografía', 'Edición', 'Organización de Eventos', 'Venta de Productos'],
+      en: ['Branding', 'Social Media Management', 'Content Creation', 'Photography', 'Editing', 'Event Organization', 'Product Sales']
+    },
+    techStack: ['Illustrator', 'Figma', 'Premiere', 'After Effects'],
+    processLabel: { es: 'Proceso Creativo', en: 'Creative Process' },
+    workflow: [
+      { step: 'Creación de Marca', icon: 'palette', es: 'Definición del branding: logotipo, paleta y mood visual de la marca personal.', en: 'Branding definition: logo, palette and visual mood of the personal brand.' },
+      { step: 'Creación de Contenido', icon: 'image', es: 'Diseño de piezas gráficas y contenido para la comunicación de la marca.', en: 'Design of graphic pieces and content for brand communication.' },
+      { step: 'Community Manager', icon: 'users', es: 'Gestión de redes sociales, publicación y respuesta a la comunidad.', en: 'Social media management, publishing and community response.' }
+    ]
   },
   {
     id: 'whisfy',
