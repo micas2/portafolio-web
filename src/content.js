@@ -108,7 +108,7 @@ export const projects = [
   },
   {
     id: 'control-stock',
-    title: 'Control de Stock Mercado Libre',
+    title: 'Control de stock para depósito de Mercado Libre',
     category: 'web',
     folder: 'inventario_mercado_libre',
     role: 'UX/UI Designer',
