@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from './LanguageContext';
 import { projects } from './content'; // Add projects import for navigation
-import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle, Cpu, Layers, Zap, Search, Settings, Rocket, Map, Palette, Code, Activity, Target, Smartphone, SearchCheck, PenTool, Compass, Mail } from 'lucide-react';
+import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, Layout, Type, Box, CheckCircle, Cpu, Layers, Zap, Search, Settings, Rocket, Map, Palette, Code, Activity, Target, Smartphone, SearchCheck, PenTool, Compass, Mail, FileSearch, LayoutTemplate, Component, MonitorSmartphone, Megaphone } from 'lucide-react';
 import galleryMap from './galleryMap.json';
 import SmartImage from './SmartImage';
 import './ProjectView.css';
@@ -27,6 +27,11 @@ const WORKFLOW_ICON_MAP = {
   penTool: PenTool,
   compass: Compass,
   mail: Mail,
+  fileSearch: FileSearch,
+  layoutTemplate: LayoutTemplate,
+  component: Component,
+  monitorSmartphone: MonitorSmartphone,
+  megaphone: Megaphone,
 };
 
 // ============================================================
@@ -41,7 +46,7 @@ function encodePath(folder, src, variant = 'full') {
     .map(seg => encodeURIComponent(seg))
     .join('/');
 
-  const isRaster = !src.endsWith('.gif') && !src.endsWith('.mp4');
+  const isRaster = !src.endsWith('.gif') && !src.endsWith('.mp4') && !src.endsWith('.svg');
 
   if (isRaster && variant === 'thumb') {
     // 600px WebP in a parallel directory
@@ -75,7 +80,7 @@ const CATEGORY_MAP = {
   'manual de logo': 'Manual de Marca',
   'web- landingpage': 'Landing Page',
   'web-app': 'Web App',
-  'mail': 'Email Marketing',
+  'mail': 'Post',
   'whatsapp': 'WhatsApp',
   'tutoriales': 'Tutoriales',
   'logo foto perfil': 'Logo & Foto Perfil',
@@ -423,7 +428,11 @@ export default function ProjectView({ project, goBack, onOpenProject }) {
             </div>
             
             <div className="narrative-visual glass-panel">
-              <img src={sec.image} alt={sec.title[language]} className="narrative-img" />
+              <img
+                src={sec.image.startsWith('http') ? sec.image : encodePath(project.folder, sec.image, 'display')}
+                alt={sec.title[language]}
+                className="narrative-img"
+              />
             </div>
           </div>
         </section>

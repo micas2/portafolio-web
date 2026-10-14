@@ -179,6 +179,7 @@ export const projects = [
     title: 'Noti Express',
     category: 'web',
     folder: 'notiexpress',
+    cover: { folder: 'notiexpress', src: 'logo1.svg' },
     role: 'Product Designer',
     description: {
       es: 'Plataforma de gestión legal escalable utilizada en Justicia Federal. Transformación de MVP y optimización UX.',
@@ -219,7 +220,7 @@ export const projects = [
             { title: { es: 'Auditoría UX', en: 'UX Audit' }, content: { es: 'Identificación de cuellos de botella en el flujo antiguo.', en: 'Identification of bottlenecks in the old flow.' }, border: 'indigo' },
             { title: { es: 'Low-Fidelity', en: 'Low-Fidelity' }, content: { es: 'Bocetado rápido para validar la regla de los 3 clics.', en: 'Quick sketching to validate the 3-click rule.' }, border: 'purple' }
           ],
-          image: 'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2070&auto=format&fit=crop'
+          image: 'logo2.svg'
         },
         {
           id: 'designSystem',
@@ -229,7 +230,7 @@ export const projects = [
             { title: { es: 'Jerarquía', en: 'Hierarchy' }, content: { es: 'Estilos legibles para textos legales largos.', en: 'Readable styles for long legal texts.' }, icon: 'type' },
             { title: { es: 'Componentes', en: 'Components' }, content: { es: 'Librería de botones, inputs y tablas con estados.', en: 'Library of buttons, inputs and tables with states.' }, icon: 'box' }
           ],
-          image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=2055&auto=format&fit=crop',
+          image: 'sistem desing.png',
           dark: true
         },
         {
@@ -238,9 +239,11 @@ export const projects = [
           description: { es: 'Diseño de piezas estratégicas para acompañar el lanzamiento de la web.', en: 'Design of strategic pieces to accompany the web launch.' },
           items: [
             { title: { es: 'Instagram Feed', en: 'Instagram Feed' }, content: { es: 'Plantillas para cohesión visual.', en: 'Templates for visual cohesion.' }, icon: 'layout' },
-            { title: { es: 'Highlights', en: 'Highlights' }, content: { es: 'Banners instructivos para usuarios.', en: 'Instructional banners for users.' }, icon: 'box' }
+            { title: { es: 'Highlights', en: 'Highlights' }, content: { es: 'Banners instructivos para usuarios.', en: 'Instructional banners for users.' }, icon: 'box' },
+            { title: { es: 'Campaña de Lanzamiento', en: 'Launch Campaign' }, content: { es: 'Piezas y estrategia para acompañar el lanzamiento de la plataforma.', en: 'Pieces and strategy to accompany the platform launch.' }, icon: 'layout' },
+            { title: { es: 'Stories', en: 'Stories' }, content: { es: 'Diseño de historias para mantener la comunicación activa con los usuarios.', en: 'Story design to keep active communication with users.' }, icon: 'box' }
           ],
-          image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop'
+          image: 'logo 3.jpg'
         }
       ],
     impact: {
@@ -252,14 +255,16 @@ export const projects = [
       }
     },
     areas: {
-      es: ['Product Design Lead', 'Legal Tech UX', 'Design Systems'],
-      en: ['Product Designer Lead', 'Legal Tech UX', 'Design Systems']
+      es: ['Diseñadora de Producto', 'Diseño Web', 'Contenido para Redes Sociales', 'Prototipado'],
+      en: ['Product Designer', 'Web Design', 'Social Media Content', 'Prototyping']
     },
-    techStack: ['Figma', 'Atomic Design', 'React'],
+    techStack: ['Figma', 'Illustrator'],
     workflow: [
-      { step: 'Investigación', es: 'Inmersión en procesos judiciales complejos.', en: 'Immersion in complex judicial processes.' },
-      { step: 'Arquitectura', es: 'Simplificación de flujos heredados (Legacy).', en: 'Simplification of legacy flows.' },
-      { step: 'Sistematización', es: 'Creación de librerías de componentes escalables.', en: 'Scalable component library creation.' }
+      { step: 'Investigación', icon: 'fileSearch', es: 'Inmersión en procesos judiciales complejos.', en: 'Immersion in complex judicial processes.' },
+      { step: 'Arquitectura', icon: 'layoutTemplate', es: 'Simplificación de flujos heredados (Legacy).', en: 'Simplification of legacy flows.' },
+      { step: 'Sistematización', icon: 'component', es: 'Creación de librerías de componentes escalables.', en: 'Scalable component library creation.' },
+      { step: 'Diseño Responsive', icon: 'monitorSmartphone', es: 'Adaptación de la interfaz a dispositivos móviles y de escritorio.', en: 'Interface adaptation to mobile and desktop devices.' },
+      { step: 'Lanzamiento en Redes Sociales', icon: 'megaphone', es: 'Lanzamiento de piezas y contenido para redes sociales.', en: 'Launch of pieces and content for social media.' }
     ]
   },
   {
