@@ -274,21 +274,32 @@ export const projects = [
     folder: 'sportmetric - web app',
     role: 'UI Designer',
     description: {
-      es: 'Plataforma de eventos deportivos. Creación de Design System e incorporación de engagement social.',
-      en: 'Sports events platform. Creation of Design System and incorporation of social engagement.'
+      es: 'Plataforma de eventos deportivos. Creación de Design System, migración de toda la plataforma desde Illustrator a Figma e incorporación de engagement social.',
+      en: 'Sports events platform. Design System creation, migration of the entire platform from Illustrator to Figma, and incorporation of social engagement.'
     },
     details: {
       es: [
         'Creación de un Design System propio escalable asegurando consistencia visual future-proof.',
-        'Gestión de migración fluida de bocetos y flujos de Photoshop hacia Figma.',
+        'Gestión de migración fluida de bocetos y flujos desde Illustrator hacia Figma.',
         'Implementación de dinámicas UX sociales (likes, eventos, follows, inscripciones).'
       ],
       en: [
         'Creation of a proprietary scalable Design System ensuring future-proof visual consistency.',
-        'Management of seamless sketch and flow migration from Photoshop to Figma.',
+        'Management of seamless sketch and flow migration from Illustrator to Figma.',
         'Implementation of social UX dynamics (likes, events, follows, sign-ups).'
       ]
-    }
+    },
+    areas: {
+      es: ['Wireframing', 'Prototipo', 'Diseño UX/UI', 'Implementación de Marca'],
+      en: ['Wireframing', 'Prototype', 'UX/UI Design', 'Brand Implementation']
+    },
+    techStack: ['Illustrator', 'Figma'],
+    workflow: [
+      { step: 'Migración a Figma', icon: 'penTool', es: 'Migración de toda la plataforma desde Illustrator hacia Figma.', en: 'Migration of the entire platform from Illustrator to Figma.' },
+      { step: 'Desarrollo de Pantallas', icon: 'layoutTemplate', es: 'Desarrollo de nuevas pantallas de la app: vistas de comentarios, eventos, formularios, etc.', en: 'Development of new app screens: comments, events, forms, etc.' },
+      { step: 'Pantallas del Sistema', icon: 'appWindow', es: 'Creación de todas las pantallas del sistema.', en: 'Creation of all system screens.' },
+      { step: 'Entregable Final', icon: 'packageCheck', es: 'Entrega final del sistema de diseño y las pantallas desarrolladas.', en: 'Final delivery of the design system and developed screens.' }
+    ]
   },
   {
     id: 'montiel-seguros',
