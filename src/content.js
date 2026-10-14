@@ -389,7 +389,18 @@ export const projects = [
         'Visual Identity Design and Brand Logo Manuals.',
         'Conceptualization of an app focused on user interests and connectivity.'
       ]
-    }
+    },
+    areas: {
+      es: ['Diseño de Marca', 'Diseño UX/UI'],
+      en: ['Brand Design', 'UX/UI Design']
+    },
+    techStack: ['Figma'],
+    processLabel: { es: 'Proceso Creativo', en: 'Creative Process' },
+    workflow: [
+      { step: 'Diseño de Logo', icon: 'palette', es: 'Diseño del logotipo y la identidad visual de la marca.', en: 'Design of the logo and the brand visual identity.' },
+      { step: 'Diseño de Estructura de la App de Audios', icon: 'layoutTemplate', es: 'Definición de la arquitectura de información y estructura de la app de audios.', en: 'Definition of the information architecture and structure of the audio app.' },
+      { step: 'Creación de Frames Alta Fidelidad', icon: 'frame', es: 'Desarrollo de los frames de alta fidelidad de todas las pantallas.', en: 'Development of high-fidelity frames for all screens.' }
+    ]
   },
   {
     id: 'app-estetica',
