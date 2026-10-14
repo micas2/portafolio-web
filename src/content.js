@@ -114,8 +114,8 @@ export const projects = [
     role: 'UX/UI Designer',
     image: null,
     description: {
-      es: 'Herramienta de gestión de stock responsiva (Desktop/Mobile) para optimizar la logística de depósito.',
-      en: 'Responsive stock management tool (Desktop/Mobile) to optimize warehouse logistics.'
+      es: 'Herramienta de gestión de stock responsiva (Desktop/Mobile) para optimizar la logística de depósito y la creación de informes.',
+      en: 'Responsive stock management tool (Desktop/Mobile) to optimize warehouse logistics and report creation.'
     },
     details: {
       es: [
@@ -130,14 +130,14 @@ export const projects = [
       ]
     },
     areas: {
-      es: ['Logistics UX', 'Data Visualization', 'Industrial UI'],
-      en: ['Logistics UX', 'Data Visualization', 'Industrial UI']
+      es: ['Diseño UX/UI', 'Responsive'],
+      en: ['Diseño UX/UI', 'Responsive']
     },
-    techStack: ['React', 'Vite', 'CSS Grid', 'Data Viz'],
+    techStack: ['Figma'],
     workflow: [
-      { step: 'Diagnóstico', es: 'Análisis de flujos críticos en depósitos.', en: 'Warehouse critical flow analysis.' },
-      { step: 'UX Strategy', es: 'Diseño de tablas complejas y selectores dinámicos.', en: 'Complex table design and dynamic selectors.' },
-      { step: 'Testing', es: 'Validación de usabilidad en entornos industriales.', en: 'Usability validation in industrial environments.' }
+      { step: 'Diagnóstico', icon: 'activity', es: 'Análisis de flujos críticos en depósitos.', en: 'Warehouse critical flow analysis.' },
+      { step: 'Estrategia UX', icon: 'target', es: 'Diseño de tablas complejas y selectores dinámicos.', en: 'Complex table design and dynamic selectors.' },
+      { step: 'Responsive', icon: 'smartphone', es: 'Adaptación de la interfaz a dispositivos móviles y de escritorio.', en: 'Adaptation of the interface to mobile and desktop devices.' }
     ]
   },
   {

@@ -44,7 +44,7 @@ export default function Portfolio({ onOpenProject }) {
               <h3 className="project-title">{project.title}</h3>
               <p className="project-desc">{project.description[language]}</p>
             </div>
-            {project.folder && (
+            {(project.folder || project.cover) && (
               <div className="project-link" title="Ver Proyecto">
                 <ArrowRight size={20} />
               </div>
